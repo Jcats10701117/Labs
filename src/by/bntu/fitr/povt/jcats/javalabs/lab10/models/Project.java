@@ -1,17 +1,16 @@
 package by.bntu.fitr.povt.jcats.javalabs.lab10.models;
 
 public class Project {
-    private final HandMadeList<Employee> employee;
-
     public final String name;
     public final Application application;
-    public final Order order;
 
-    public Project(Order order, Application application) {
+    public Project(Order order) {
         this.name = order.projectName;
-        this.application = application;
-        this.order = order;
-        employee = new HandMadeList<>();
+        var appParts = new HandMadeList<ApplicationPart>();
+        for (var appPartName: order.appPartsNames) {
+            appParts.add(new ApplicationPart(appPartName));
+        }
+        this.application = new Application(order.appName, appParts);
     }
 
     public boolean isComplete() {

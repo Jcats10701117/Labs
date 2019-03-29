@@ -8,7 +8,6 @@ import static org.junit.Assert.*;
 
 
 public class HandMadeListTest {
-
     @org.junit.Test
     public void canAddElement() {
         HandMadeList<Integer> list = new HandMadeList<>();
@@ -122,5 +121,99 @@ public class HandMadeListTest {
             assertEquals(expected, n);
             index++;
         }
+    }
+
+    @org.junit.Test
+    public void canConvertToArray() {
+        var list = new HandMadeList<Integer>();
+
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+        var expected = new Integer[] {1,2,3};
+        var actual = list.toArray();
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @org.junit.Test
+    public void canAddAll() {
+        var list = new HandMadeList<Integer>();
+        var addedList = new HandMadeList<Integer>();
+        addedList.add(1);
+
+        list.addAll(addedList);
+
+        var actual = (int)list.elementAt(0);
+        var expected = 1;
+
+        assertEquals(expected, actual);
+    }
+
+    @org.junit.Test
+    public void canCheckContainsAll() {
+        var list = new HandMadeList<Integer>();
+        var containsCollection = new HandMadeList<Integer>();
+
+        containsCollection.add(1);
+        containsCollection.add(2);
+        containsCollection.add(3);
+
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+        var actual = list.containsAll(containsCollection);
+
+        assertTrue(actual);
+    }
+
+    @org.junit.Test
+    public void canClear() {
+        var list = new HandMadeList<Integer>();
+
+        list.add(1);
+        list.clear();
+
+        assertTrue(list.isEmpty());
+    }
+
+    @org.junit.Test
+    public void canRemoveAll() {
+        var list = new HandMadeList<Integer>();
+
+        var removeList = new HandMadeList<Integer>();
+        removeList.add(1);
+        removeList.add(2);
+        removeList.add(3);
+
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+        list.removeAll(removeList);
+
+        assertTrue(list.isEmpty());
+    }
+
+    @org.junit.Test
+    public void canRetailAll() {
+        var list = new HandMadeList<Integer>();
+
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+
+        var retailList = new HandMadeList<Integer>();
+
+        retailList.add(1);
+        retailList.add(2);
+        retailList.add(3);
+
+        list.retainAll(retailList);
+
+        assertEquals(retailList.size(), list.size());
     }
 }

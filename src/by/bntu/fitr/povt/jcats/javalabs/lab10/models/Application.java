@@ -1,12 +1,13 @@
 package by.bntu.fitr.povt.jcats.javalabs.lab10.models;
-import java.util.Iterator;
+
+import java.util.Collection;
 
 public class Application {
-    public HandMadeList<ApplicationPart> parts;
+    public Collection<ApplicationPart> parts;
 
     public final String name;
 
-    public Application(String name, HandMadeList<ApplicationPart> parts){
+    public Application(String name, Collection<ApplicationPart> parts){
         this.parts = parts;
         this.name = name;
     }

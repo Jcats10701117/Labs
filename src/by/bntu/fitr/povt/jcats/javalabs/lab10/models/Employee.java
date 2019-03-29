@@ -18,4 +18,8 @@ public class Employee {
             }
         }
     }
+
+    public void pay(int cash) {
+        person.giveCash(cash);
+    }
 }

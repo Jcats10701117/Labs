@@ -1,5 +1,7 @@
 package by.bntu.fitr.povt.jcats.javalabs.lab10.models;
 
+
+
 public class ApplicationPart {
     public final String name;
     private double state;
