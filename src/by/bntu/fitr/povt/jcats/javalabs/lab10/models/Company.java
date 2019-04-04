@@ -15,8 +15,10 @@ public class Company {
         orders = new HandMadeList<>();
         developerPlatform.addCompany(this);
     }
+
+    public Amount amount;
     public final String name;
-    private int companyCash;
+    private Cash companyCash;
     private Collection<Employee> employee;
     private Collection<Employee> availableEmployee;
     private Collection<Team> teams;
@@ -25,23 +27,10 @@ public class Company {
     private Collection<Order> orders;
     private EmployeeFactory employeeFactory;
 
-    public int getCompanyCash() {
-        return companyCash;
-    }
 
-    private int takeCash(int sum) {
-        if (sum > companyCash) {
-            var result = companyCash;
-            companyCash = 0;
-            return result;
-        }
-        companyCash -= sum;
-        return sum;
-    }
-
-    private void paySalary(Employee employee){
-        employee.pay(takeCash(employee.job.salary));
-    }
+    private void paySalary (){
+        employee.forEach(e -> e.person.cash.giveCash(amount));
+    } //TODO Unhanded exception
 
     public void takeOrder(Order order) {
         var project = new Project(order);
@@ -88,7 +77,11 @@ public class Company {
 
         var profit = order.customer.takeAwayOrder(project);
 
-        companyCash += profit;
+
+
+        companyCash += profit;  //TODO incompatible types
+
+
 
         for (var teammate: projectManager.getCurrentTeam().getTeammates()) {
             paySalary(teammate);
@@ -101,7 +94,7 @@ public class Company {
 
     }
 
-    private void employ(Employee employee) {
+    public void employ(Employee employee) {
         this.employee.add(employee);
         this.availableEmployee.add(employee);
     }
@@ -134,7 +127,7 @@ public class Company {
         teams.remove(team);
     }
 
-    private Collection<String> getRequirements(Project project) {
+    public Collection<String> getRequirements(Project project) {
         HandMadeList<String> employeeOpportunities = new HandMadeList<>();
         HandMadeList<String> employeeRequirements = new HandMadeList<>();
 

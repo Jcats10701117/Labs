@@ -16,8 +16,8 @@ public class EmployeeFactory {
         return new ProjectManager(person);
     }
 
-    public Customer createCustomer() {
-        Person person = personFactory.createPerson();
-        return new Customer(person);
-    }
+//    public Customer createCustomer() {
+//        Person person = personFactory.createPerson();
+//        return new Customer(person );
+//    }
 }

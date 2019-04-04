@@ -19,6 +19,13 @@ public class Team {
     }
 
     public Employee[] getTeammates() {
-        return (Employee[]) teammates.toArray();
+        var objectTeammates = teammates.toArray();
+        Employee[] employeeTeammates = new Employee[objectTeammates.length];
+
+        for (int i = 0; i < objectTeammates.length; i++){
+            employeeTeammates[i] = (Employee) objectTeammates[i];
+        }
+
+        return employeeTeammates;
     }
 }

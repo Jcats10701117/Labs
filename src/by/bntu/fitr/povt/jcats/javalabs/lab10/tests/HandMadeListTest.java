@@ -108,9 +108,9 @@ public class HandMadeListTest {
     public void canForEachIterator() {
         HandMadeList<Integer> list = new HandMadeList<>();
 
-        int[] expectedArray = { 5,6,7 };
+        int[] expectedArray = { 15,6,7 };
 
-        list.add(5);
+        list.add(15);
         list.add(6);
         list.add(7);
 

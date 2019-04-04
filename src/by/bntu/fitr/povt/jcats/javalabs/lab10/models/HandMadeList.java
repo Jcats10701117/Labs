@@ -95,7 +95,10 @@ public class HandMadeList<T> implements Iterable<T>, Collection<T> {
         return new HandMadeIterator<>(array);
     }
     public Object[] toArray() {
-        return array.clone();
+        Object[] result = new Object[array.length];
+        for (int i = 0; i < result.length; i++)
+            result[i] = array[i];
+        return result;
     }
     public <T1> T1[] toArray(T1[] a) {
         return null;
