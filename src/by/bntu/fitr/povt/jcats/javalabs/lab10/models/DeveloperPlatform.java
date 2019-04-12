@@ -14,7 +14,7 @@ public class DeveloperPlatform {
     }
     public void publishOrder(Order order) {
         if (companies.isEmpty()) return;
-        var company = (Company)companies.toArray()[random.nextInt(companies.size() - 1)];
+        var company = (Company)companies.toArray()[random.nextInt(companies.size())];
         company.takeOrder(order);
     }
 }

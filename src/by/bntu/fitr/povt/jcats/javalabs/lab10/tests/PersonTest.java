@@ -8,9 +8,9 @@ import static org.junit.Assert.*;
 public class PersonTest {
 
 //    @Test
-//    public void giveCash() {
+//    public void acceptPayment() {
 //        Person p1 = new Person("SomeName", 20);
-//        p1.giveCash(200);
+//        p1.acceptPayment(200);
 //
 //        int expected = 200;
 //        int actual = p1.getCash();
@@ -21,7 +21,7 @@ public class PersonTest {
 //    @Test
 //    public void giveNegativeCash() {
 //        Person p1 = new Person("SomeName", 20);
-//        p1.giveCash(-200);
+//        p1.acceptPayment(-200);
 //
 //        int expected = 0;
 //        int actual = p1.getCash();
@@ -33,9 +33,9 @@ public class PersonTest {
 //    public void takeCashSmallerThanPersonsCash() {
 //        Person p1 = new Person("SoName", 20);
 //
-//        p1.giveCash(200);
+//        p1.acceptPayment(200);
 //
-//        int actual = p1.takeCash(50);
+//        int actual = p1.takePayment(50);
 //        int expected = 50;
 //
 //        assertEquals(expected, actual);
@@ -45,9 +45,9 @@ public class PersonTest {
 //    public void takeCashBiggerThanPersonsCash() {
 //        Person p1 = new Person("SomeName", 20);
 //
-//        p1.giveCash(200);
+//        p1.acceptPayment(200);
 //
-//        int actual = p1.takeCash(500);
+//        int actual = p1.takePayment(500);
 //        int expected = 200;
 //
 //        assertEquals(expected, actual);

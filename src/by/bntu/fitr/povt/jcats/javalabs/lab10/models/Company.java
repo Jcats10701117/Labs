@@ -3,7 +3,21 @@ package by.bntu.fitr.povt.jcats.javalabs.lab10.models;
 import java.util.Arrays;
 import java.util.Collection;
 
-public class Company {
+class DayCounter {
+    private int dayAmount;
+    private int currentDay;
+    public boolean isRegularDay() { return dayAmount == currentDay; }
+    public DayCounter(int dayAmount) {
+        this.dayAmount = dayAmount;
+    }
+    public void nextDay() {
+        if (++currentDay == dayAmount) {
+            currentDay = 0;
+        }
+    }
+}
+
+public class Company implements IPayer {
     public Company(String name, EmployeeFactory employeeFactory, DeveloperPlatform developerPlatform) {
         this.name = name;
         this.employeeFactory = new EmployeeFactory();
@@ -13,24 +27,26 @@ public class Company {
         projectManagers = new HandMadeList<>();
         availableEmployee = new HandMadeList<>();
         orders = new HandMadeList<>();
+        companyBankAccount = new BankAccount();
+        dayCounter = new DayCounter(7);
         developerPlatform.addCompany(this);
     }
 
-    public Amount amount;
+    public Transaction amount;
     public final String name;
-    private Cash companyCash;
-    private Collection<Employee> employee;
-    private Collection<Employee> availableEmployee;
-    private Collection<Team> teams;
-    private Collection<ProjectManager> projectManagers;
-    private Collection<Project> currentProjects;
-    private Collection<Order> orders;
-    private EmployeeFactory employeeFactory;
+    public final BankAccount companyBankAccount;
+    public Collection<Employee> employee;
+    public Collection<Employee> availableEmployee;
+    public Collection<Team> teams;
+    public Collection<ProjectManager> projectManagers;
+    public Collection<Project> currentProjects;
+    public Collection<Order> orders;
+    public EmployeeFactory employeeFactory;
+    public DayCounter dayCounter;
 
-
-    private void paySalary (){
-        employee.forEach(e -> e.person.cash.giveCash(amount));
-    } //TODO Unhanded exception
+    public void paySalary (){
+        employee.forEach(employee -> new Transaction(this, employee, employee.job.salary));
+    }
 
     public void takeOrder(Order order) {
         var project = new Project(order);
@@ -44,7 +60,7 @@ public class Company {
         orders.add(order);
     }
 
-    private ProjectManager getFreeProjectManager() {
+    public ProjectManager getFreeProjectManager() {
         for (var pManager: projectManagers) {
             if (pManager.getCurrentProject() == null){
                 return pManager;
@@ -58,7 +74,7 @@ public class Company {
         return pManager;
     }
 
-    private void completeOrder(Project project) {
+    public void completeOrder(Project project) {
         Order order = null;
         ProjectManager projectManager = null;
 
@@ -77,16 +93,6 @@ public class Company {
 
         var profit = order.customer.takeAwayOrder(project);
 
-
-
-        companyCash += profit;  //TODO incompatible types
-
-
-
-        for (var teammate: projectManager.getCurrentTeam().getTeammates()) {
-            paySalary(teammate);
-        }
-
         removeTeam(projectManager.getCurrentTeam());
 
         projectManager.setCurrentTeam(null);
@@ -99,7 +105,7 @@ public class Company {
         this.availableEmployee.add(employee);
     }
 
-    private Team addTeam(Project project) {
+    public Team addTeam(Project project) {
         Team team = new Team();
 
         var requirements = getRequirements(project);
@@ -156,5 +162,9 @@ public class Company {
                 completeOrder(pr);
             }
         }
+    }
+
+    public BankAccount getBankAccount() {
+        return companyBankAccount;
     }
 }
